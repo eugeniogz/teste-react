@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "expo",
+            "request": "attach",
+            "name": "Debug Expo app",
+            "projectRoot": "${workspaceFolder}",
+            "bundlerPort": "8081",
+            "bundlerHost": "127.0.0.1"
+        },
+        {
+            "type": "expo",
+            "request": "attach",
+            "name": "Debug Expo app",
+            "projectRoot": "${workspaceFolder}",
+            "bundlerPort": "8081",
+            "bundlerHost": "127.0.0.1"
+        },
+        {
+            "name": "Debug Android",
+            "request": "launch",
+            "type": "reactnative",
+            "cwd": "${workspaceFolder}",
+            "platform": "android"
+        },
+        {
+            "name": "Debug Android Hermes",
+            "request": "launch",
+            "type": "reactnativedirect",
+            "cwd": "${workspaceFolder}",
+            "platform": "android"
+        },
+        {
+            "type": "reactnative",
+            "port": 8081,
+            "sourceMaps": true,
+            "request": "attach",
+            "name": "Launch Debug Attach",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
