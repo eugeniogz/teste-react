@@ -1,10 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Suspense, Component, useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FloatingActionButton } from 'react-native-floating-action';
-import { Button, StyleSheet, Text, View, ActivityIndicator, ScrollView } from 'react-native';
-//import { FloatingActionButton } from 'react-native-elements'
-
+import { Button, StyleSheet, Text, View, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 /*
 export default function App() {
     // (async () => {
@@ -59,6 +57,11 @@ const App = () => {
     }
     return (
       <SafeAreaView style={styles.container}>
+        <TouchableOpacity
+          style={styles.floatingButton}
+          onPress={()=> pressionado()}>
+          <Ionicons name="add-circle" size={32} color="blue"/>
+        </TouchableOpacity>
         <ScrollView>
           <View style={styles.view}>
           <View style={styles.viewInterno}>
@@ -68,7 +71,7 @@ const App = () => {
         {data2.map((memo) => <Text onPress={() => pressionado()} style={styles.memo} key={memo.id}>{memo.content}</Text>)}
           </View>
           </View>
-          <FloatingActionButton
+          {/* <FloatingActionButton
               icon={{ name: 'add' }}
               onPress={()=> addItem()}
               style={{
@@ -76,13 +79,14 @@ const App = () => {
                 right: 20,
                 bottom: 20,
               }}
-          ></FloatingActionButton>
+          ></FloatingActionButton> */}
         </ScrollView>
       </SafeAreaView>
     );
   };
 
   const addItem = () => {
+    console.log("Logando");
     //setItems([...items, { id: items.length + 1, name: `Item ${items.length + 1}` }]);
   };
  
@@ -110,6 +114,13 @@ const App = () => {
       // justifyContent: "center",
       // alignItems: "center",
     },
+    floatingButton: {
+      position: 'absolute',
+      width: 60, height: 60,
+      alignItems: 'center',
+      justifyContent: 'center',
+      right: 30, bottom: 30, 
+    }
   });
   
   export default App;
