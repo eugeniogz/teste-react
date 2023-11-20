@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Suspense, Component, useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, StyleSheet, Text, View, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView as SAF } from 'react-native';
+import { Button, StyleSheet, Text, View, ActivityIndicator, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 /*
 export default function App() {
@@ -30,7 +31,7 @@ const App = () => {
     const [data, setData] = useState(null);
   
     const fetchData = async () => {
-      const response = await fetch("http://192.168.0.36:3001/journals"); // dir: server, npm start
+      const response = await fetch(Platform.OS === "android"?"http://192.168.0.36:3001/journals":"http://192.168.0.53:3001/journals"); // dir: server, npm start
       const json = await response.json();
       setData(json);
     };
@@ -56,12 +57,12 @@ const App = () => {
         data2.push(data[i]);
     }
     return (
-      <SafeAreaView style={styles.container}>
-        <TouchableOpacity
-          style={styles.floatingButton}
-          onPress={()=> pressionado()}>
-          <Ionicons name="add-circle" size={32} color="blue"/>
-        </TouchableOpacity>
+      <SAF style={styles.container}>
+        {/* <TouchableOpacity
+          > */}
+          <Ionicons onPress={()=> pressionado()} style={styles.floatingButton}
+ name="add-circle" size={32} color="blue"/>
+        {/* </TouchableOpacity> */}
         <ScrollView>
           <View style={styles.view}>
           <View style={styles.viewInterno}>
@@ -81,7 +82,7 @@ const App = () => {
               }}
           ></FloatingActionButton> */}
         </ScrollView>
-      </SafeAreaView>
+      </SAF>
     );
   };
 
