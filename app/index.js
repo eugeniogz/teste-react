@@ -3,7 +3,7 @@ import React, { Suspense, Component, useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View, ActivityIndicator, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import SAF from './SAF';
+import { SafeAreaView as SAF } from 'react-native';
 
 const App = () => {
     const [data, setData] = useState(null);
@@ -34,20 +34,21 @@ const App = () => {
       else
         data2.push(data[i]);
     }
+    var ct = data1[0].content;
     return (
       <SAF style={styles.container}>
         <TouchableOpacity  style={styles.floatingButton}>
-          <Link href={{pathname: "/edit/[id]", params: { id: data1[0].id }}}>
-          <Ionicons  name="add-circle" size={62} color="red"/>
+          <Link href={{pathname: "/insert/insert"}}>
+          <Ionicons  name="add-circle" size={62} color="blue"/>
           </Link>
         </TouchableOpacity>
         <ScrollView>
           <View style={styles.view}>
           <View style={styles.viewInterno}>
-            {data1.map((memo) => <Text onPress={() => pressionado()} style={styles.memo} key={memo.id}>{memo.content}</Text>)}
+            {data1.map((memo) => memoCard(memo))}
           </View>
           <View style={styles.viewInterno}>
-            {data2.map((memo) => <Text onPress={() => pressionado()} style={styles.memo} key={memo.id}>{memo.content}</Text>)}
+            {data2.map((memo) => memoCard(memo))}
           </View>
           </View>
         </ScrollView>
@@ -55,15 +56,14 @@ const App = () => {
     );
   };
 
-  const addItem = () => {
-    console.log("Logando");
-    //setItems([...items, { id: items.length + 1, name: `Item ${items.length + 1}` }]);
-  };
- 
-  function pressionado() {
-    console.log("Logando");
-  }
   
+  function memoCard(memo) {
+    var id = memo.id;
+    return <Link href={{pathname: "/edit/[id]", params: { id: memo.id }}} asChild>
+                <Text style={styles.memo} key={memo.id}>{memo.content}</Text>
+            </Link>
+  }
+
   const styles = StyleSheet.create({
     memo: {
       // flex: 0.4,

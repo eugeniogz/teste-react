@@ -36,6 +36,7 @@
           }
         }
       ]
-    ]
+    ],
+    "scheme": "your-app-scheme"
   }
 }
