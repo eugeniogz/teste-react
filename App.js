@@ -1,9 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Suspense, Component, useState, useEffect } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { SafeAreaView as SAF } from 'react-native';
 import { Button, StyleSheet, Text, View, ActivityIndicator, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import SAF from './SAF';
 /*
 export default function App() {
     // (async () => {
