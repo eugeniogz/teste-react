@@ -60,7 +60,7 @@ const App = () => {
         {/* <TouchableOpacity
           > */}
           <Ionicons onPress={()=> pressionado()} style={styles.floatingButton}
- name="add-circle" size={32} color="blue"/>
+ name="add-circle" size={62} color="blue"/>
         {/* </TouchableOpacity> */}
         <ScrollView>
           <View style={styles.view}>
@@ -115,6 +115,7 @@ const App = () => {
       // alignItems: "center",
     },
     floatingButton: {
+      zIndex: 1,
       position: 'absolute',
       width: 60, height: 60,
       alignItems: 'center',
