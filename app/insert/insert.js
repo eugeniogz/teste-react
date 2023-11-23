@@ -1,39 +1,69 @@
 import React from 'react';
-import { useNavigation, useRouter } from 'expo-router';
-import { useEffect } from 'react';
+import { useNavigation, useRouter, router } from 'expo-router';
+import { useEffect, useRef } from 'react';
 import { Button, TextInput, View, StyleSheet } from 'react-native';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import { Header } from 'react-native-elements';
-
+import App from '../index'
 
 export default function Page() {
-    uuid=uuidv4();
-    console.log(uuid);
-    console.log(new Date().toISOString());
-    const [text, onChangeText] = React.useState('');
-    console.log(text);
-    
-    // Navigation
-    const navigation = useNavigation();
-    // Effect
+    const [ret, setRet] = React.useState('inicio');
+    const [text, setText] = React.useState('');
+    // const textRef = React.createRef();
+    const postData = async (txt) => {
+      const response = await fetch(Platform.OS === "android"?"http://192.168.0.36:3001/journals":"http://192.168.0.53:3001/journals",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          id: uuidv4(),
+          content: txt,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      }
+      
+      );
+      setRet(response.status);
+    };
+
+    // const exitListener = useRef(null);
+    /*
     useEffect(() => { 
-        navigation.addListener('beforeRemove', (e) => {
-            e.preventDefault();
-            console.log('onback');
-            // Do your stuff here
-            navigation.dispatch(e.data.action);
-        });
+      const handleBack = (e) => {
+        if (e.target.startsWith('insert/insert') && e.data.action.source?.startsWith('insert/insert')) {
+          e.preventDefault();
+          postData();
+        } else {
+          console.log('onback 2');
+          navigation.dispatch(e.data.action); 
+        }
+      };
+
+      // exitListener.current = navigation;
+
+      navigation.addListener('beforeRemove', handleBack);
+      // return () => { exitListener.current.removeListener('beforeRemove', handleBack) };
     }, []);
-
+    */
     const router = useRouter();
+    if (ret!='inicio') {
+      router.back();
+    }
 
-    return <View><Header><Button title="Go back" onPress={() => router.back()} color="white" /><Button title="Delete" onPress={() => router.back()} color="white"/></Header>
+    return <View>
+      <Button title="Salvar" onPress={() => {postData(text) /*navigation.goBack()*/}} />
+      <Button title="Cancelar" onPress={router.back()}/>
         <TextInput
         style={styles.input}
-        onChangeText={onChangeText}
+        // ref={textRef}
+        onChangeText={setText}
         value={text}
-      /></View>;
+        />
+      </View>;
 }
 
 const styles = StyleSheet.create({

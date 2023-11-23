@@ -2,18 +2,18 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Suspense, Component, useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View, ActivityIndicator, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { Link, useNavigation } from 'expo-router';
 import { SafeAreaView as SAF } from 'react-native';
 
 const App = () => {
     const [data, setData] = useState(null);
   
     const fetchData = async () => {
-      const response = await fetch(Platform.OS === "android"?"http://192.168.0.36:3001/journals":"http://192.168.0.53:3001/journals"); // dir: server, npm start
+      const response = await fetch(Platform.OS === "android"?"http://192.168.0.36:3001/journals":"http://192.168.0.53:3001/journals");
       const json = await response.json();
       setData(json);
     };
-  
+
     useEffect(() => {
       fetchData();
     }, []);
@@ -38,7 +38,8 @@ const App = () => {
     return (
       <SAF style={styles.container}>
         <TouchableOpacity  style={styles.floatingButton}>
-          <Link href={{pathname: "/insert/insert"}}>
+          <Link href={{pathname: "/insert/insert"}} key="9876123" asChild>
+            {/* <Text>tt</Text> */}
           <Ionicons  name="add-circle" size={62} color="blue"/>
           </Link>
         </TouchableOpacity>
@@ -56,13 +57,12 @@ const App = () => {
     );
   };
 
-  
   function memoCard(memo) {
     var data = JSON.stringify(memo);
     var idlink = memo.id + '1';
     return <Link href={{pathname: "/edit/[data]", params: { data: data }}}  key={idlink} asChild>
                 <Text style={styles.memo} key={memo.id}>{memo.content}</Text>
-            </Link>
+           </Link>
   }
 
   const styles = StyleSheet.create({
