@@ -6,7 +6,7 @@ import { Link, useNavigation } from 'expo-router';
 import { SafeAreaView as SAF } from 'react-native';
 
 const App = () => {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([]);
   
     const fetchData = async () => {
       const response = await fetch(Platform.OS === "android"?"http://192.168.0.36:3001/journals":"http://192.168.0.53:3001/journals");
@@ -34,12 +34,11 @@ const App = () => {
       else
         data2.push(data[i]);
     }
-    var ct = data1[0].content;
     return (
-      <SAF style={styles.container}>
+      // <SAF style={styles.container}>
+      <View  style={styles.container}>
         <TouchableOpacity  style={styles.floatingButton}>
           <Link href={{pathname: "/insert/insert"}} key="9876123" asChild>
-            {/* <Text>tt</Text> */}
           <Ionicons  name="add-circle" size={62} color="blue"/>
           </Link>
         </TouchableOpacity>
@@ -53,7 +52,8 @@ const App = () => {
           </View>
           </View>
         </ScrollView>
-      </SAF>
+        </View>
+      //{/* </SAF> */}
     );
   };
 

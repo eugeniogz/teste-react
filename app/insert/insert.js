@@ -4,8 +4,6 @@ import { useEffect, useRef } from 'react';
 import { Button, TextInput, View, StyleSheet } from 'react-native';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
-import { Header } from 'react-native-elements';
-import App from '../index'
 
 export default function Page() {
     const [ret, setRet] = React.useState('inicio');
@@ -29,6 +27,10 @@ export default function Page() {
       );
       setRet(response.status);
     };
+
+    // useEffect(() => { 
+      
+    // }, []);
 
     // const exitListener = useRef(null);
     /*
@@ -56,7 +58,7 @@ export default function Page() {
 
     return <View>
       <Button title="Salvar" onPress={() => {postData(text) /*navigation.goBack()*/}} />
-      <Button title="Cancelar" onPress={router.back()}/>
+      <Button title="Cancelar" onPress={()=>router.back()}/>
         <TextInput
         style={styles.input}
         // ref={textRef}
