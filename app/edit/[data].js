@@ -3,8 +3,8 @@ import { Text, View, Button } from 'react-native';
 import { useEffect } from 'react';
 
 export default function Page() {
-    const { id } = useLocalSearchParams();
-
+    const { data } = useLocalSearchParams();
+    memo = JSON.parse(decodeURIComponent(data));
     // Navigation
     const navigation = useNavigation();
 
@@ -22,5 +22,5 @@ export default function Page() {
 
     return <View>
         <Button title="Go back" onPress={() => router.back()} />
-        <Text>Blog post: {id}</Text></View>;
+        <Text>Blog post: {memo.content}</Text></View>;
 }

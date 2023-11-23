@@ -58,8 +58,8 @@ const App = () => {
 
   
   function memoCard(memo) {
-    var id = memo.id;
-    return <Link href={{pathname: "/edit/[id]", params: { id: memo.id }}} asChild>
+    var data = JSON.stringify(memo);
+    return <Link href={{pathname: "/edit/[data]", params: { data: data }}} asChild>
                 <Text style={styles.memo} key={memo.id}>{memo.content}</Text>
             </Link>
   }
