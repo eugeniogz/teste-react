@@ -1,6 +1,9 @@
-import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
-import { TextInput, View, Button, StyleSheet } from 'react-native';
-import React, { useEffect } from 'react';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { TextInput, View, Button } from 'react-native';
+import React from 'react';
+import styles from '../stylesReuse';
+import url from '../config';
+import { Icon } from '@rneui/themed';
 
 export default function Page() {
     const { data } = useLocalSearchParams();
@@ -9,7 +12,7 @@ export default function Page() {
     const [ret, setRet] = React.useState('inicio');
     const [text, setText] = React.useState(memo.content);
     const postData = async (txt) => {
-      const response = await fetch((Platform.OS === "android"?"http://192.168.0.36:3001/journals/":"http://192.168.0.53:3001/journals/") + memo.id,
+      const response = await fetch((url) + memo.id,
       {
         method: "PATCH",
         body: JSON.stringify({
@@ -28,7 +31,7 @@ export default function Page() {
     };
 
     const deleteData = async () => {
-        const response = await fetch((Platform.OS === "android"?"http://192.168.0.36:3001/journals/":"http://192.168.0.53:3001/journals/") + memo.id,
+        const response = await fetch((url) + memo.id,
         {
           method: "DELETE",
           headers: {
@@ -40,30 +43,18 @@ export default function Page() {
         setRet(response.status);
       };
   
-    
-    // Navigation
-    // const navigation = useNavigation();
-
-    // Effect
-    /*
-    useEffect(() => { 
-        navigation.addListener('beforeRemove', (e) => {
-            e.preventDefault();
-            console.log('onback');
-            // Do your stuff here
-            navigation.dispatch(e.data.action);
-        });
-    }, []);
-    */
     const router = useRouter();
     if (ret!='inicio') {
         router.back();
     }
     
     return <View>
-        <Button title="Salvar" onPress={() => postData(text)} />
-        <Button title="Apagar" onPress={() => deleteData()} />
+        <View style={{flex: 1, flexDirection: 'row', minHeight: 35, maxHeight: 35}}>
+        <Icon name='save' style={{backgroundColor: "#808080", maxWidth: 35, minHeight: 35, maxHeight: 35}} onPress={() => postData(text)} reverse={false} color="white"/>
+        <Icon name='delete' style={{backgroundColor: "#808080", maxWidth: 35, minHeight: 35, maxHeight: 35, verticalAlign: 'center'}} onPress={() => deleteData()} reverse={false} color="white"/>
+        </View>
         <TextInput
+        multiline={true}
         style={styles.input}
         onChangeText={setText}
         value={text}
@@ -71,12 +62,3 @@ export default function Page() {
         </View>;
 }
 
-const styles = StyleSheet.create({
-    input: {
-      height: 40,
-      margin: 12,
-      borderWidth: 1,
-      padding: 10,
-    },
-  });
-  

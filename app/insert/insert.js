@@ -4,13 +4,14 @@ import { useEffect, useRef } from 'react';
 import { Button, TextInput, View, StyleSheet } from 'react-native';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
+import styles from '../stylesReuse';
+import url from '../config';
 
 export default function Page() {
     const [ret, setRet] = React.useState('inicio');
     const [text, setText] = React.useState('');
-    // const textRef = React.createRef();
     const postData = async (txt) => {
-      const response = await fetch(Platform.OS === "android"?"http://192.168.0.36:3001/journals":"http://192.168.0.53:3001/journals",
+      const response = await fetch(url,
       {
         method: "POST",
         body: JSON.stringify({
@@ -28,10 +29,8 @@ export default function Page() {
       setRet(response.status);
     };
 
-    // useEffect(() => { 
-      
-    // }, []);
-
+    // Tentativa de capturar e tratar o back, não tive sucesso em remover o listener
+    // sem esse tipo de tratamento, no android, ao clicar em back (botao fisico) sai da tela sem salvar
     // const exitListener = useRef(null);
     /*
     useEffect(() => { 
@@ -61,19 +60,9 @@ export default function Page() {
       <Button title="Cancelar" onPress={()=>router.back()}/>
         <TextInput
         style={styles.input}
-        // ref={textRef}
+        multiline={true}
         onChangeText={setText}
         value={text}
         />
       </View>;
 }
-
-const styles = StyleSheet.create({
-    input: {
-      height: 40,
-      margin: 12,
-      borderWidth: 1,
-      padding: 10,
-    },
-  });
-  

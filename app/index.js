@@ -1,15 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { Suspense, Component, useState, useEffect } from 'react';
-import { Button, StyleSheet, Text, View, ActivityIndicator, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Link, useNavigation } from 'expo-router';
-import { SafeAreaView as SAF } from 'react-native';
+import { Link } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import url from './config';
 
 const App = () => {
     const [data, setData] = useState([]);
   
     const fetchData = async () => {
-      const response = await fetch(Platform.OS === "android"?"http://192.168.0.36:3001/journals":"http://192.168.0.53:3001/journals");
+      const response = await fetch(url);
       const json = await response.json();
       setData(json);
     };
@@ -35,7 +34,6 @@ const App = () => {
         data2.push(data[i]);
     }
     return (
-      // <SAF style={styles.container}>
       <View  style={styles.container}>
         <TouchableOpacity  style={styles.floatingButton}>
           <Link href={{pathname: "/insert/insert"}} key="9876123" asChild>
@@ -52,8 +50,7 @@ const App = () => {
           </View>
           </View>
         </ScrollView>
-        </View>
-      //{/* </SAF> */}
+      </View>
     );
   };
 
@@ -67,10 +64,11 @@ const App = () => {
 
   const styles = StyleSheet.create({
     memo: {
-      // flex: 0.4,
       padding: 4,
       margin: 3,
       backgroundColor: "#c0c0c0",
+      maxHeight: 400,
+      minHeight: 100
     },
     view: {
       flex: 1, flexDirection: 'row'
@@ -87,7 +85,7 @@ const App = () => {
       width: 60, height: 60,
       alignItems: 'center',
       justifyContent: 'center',
-      right: 30, bottom: 30, 
+      right: 30, bottom: 15, 
     }
   });
   
