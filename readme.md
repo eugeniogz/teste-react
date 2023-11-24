@@ -1,9 +1,14 @@
 # Demonstração de um CRUD em react expo
 
 ## Execução
-Iniciar o servidor backend:
+* Iniciar o servidor backend:
 
-### cd server
-### npm start
+> cd server
 
-Acessar o arquivo config.js e colocar na variável 'url' o ip correto
+> npm start
+
+* Acessar o arquivo config.js e colocar na variável 'url' o ip correto
+
+* Executar o app
+
+> npx expo

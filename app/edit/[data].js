@@ -49,9 +49,12 @@ export default function Page() {
     }
     
     return <View>
-        <View style={{flex: 1, flexDirection: 'row', minHeight: 35, maxHeight: 35}}>
-        <Icon name='save' style={{backgroundColor: "#808080", maxWidth: 35, minHeight: 35, maxHeight: 35}} onPress={() => postData(text)} reverse={false} color="white"/>
-        <Icon name='delete' style={{backgroundColor: "#808080", maxWidth: 35, minHeight: 35, maxHeight: 35, verticalAlign: 'center'}} onPress={() => deleteData()} reverse={false} color="white"/>
+        <View style={styles.commandBar}>
+        <Button style={styles.button} title="Salvar" onPress={() => postData(text)} />
+        <Button style={styles.button} title="Apagar" onPress={() => deleteData()} />
+
+        {/* <Icon name='save' style={{backgroundColor: "#808080", maxWidth: 35, minHeight: 35, maxHeight: 35}} onPress={() => postData(text)} reverse={false} color="white"/>
+        <Icon name='delete' style={{backgroundColor: "#808080", maxWidth: 35, minHeight: 35, maxHeight: 35, verticalAlign: 'center'}} onPress={() => deleteData()} reverse={false} color="white"/> */}
         </View>
         <TextInput
         multiline={true}

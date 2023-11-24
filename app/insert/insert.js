@@ -56,13 +56,15 @@ export default function Page() {
     }
 
     return <View>
-      <Button title="Salvar" onPress={() => {postData(text) /*navigation.goBack()*/}} />
-      <Button title="Cancelar" onPress={()=>router.back()}/>
-        <TextInput
+      <View style={styles.commandBar}>
+      <Button style={styles.button} title="Salvar" onPress={() => {postData(text) /*navigation.goBack()*/}} />
+      <Button style={styles.button} title="Cancelar" onPress={()=>router.back()}/>
+      </View>
+      <TextInput
         style={styles.input}
         multiline={true}
         onChangeText={setText}
         value={text}
-        />
-      </View>;
+      />
+    </View>;
 }
